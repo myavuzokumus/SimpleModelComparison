@@ -74,8 +74,6 @@ def remove_other_class_columns(df, class_column):
 def main():
     st.set_page_config(page_title="Simple Model Comparison", page_icon=":shark:", initial_sidebar_state="expanded")
     st.title("Simple Model Comparison")
-    st.header("Simple Model Comparison")
-    st.subheader("This application allows users to upload datasets, handle missing data, and compare different imputation strategies.")
 
     # About section
     st.sidebar.title("About")
