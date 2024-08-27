@@ -49,7 +49,7 @@ def impute_missing_data(df, strategy='mean', n_neighbors=4):
 def calculate_metrics(original, imputed):
     try:
         # Calculate RMSE and MAD while ignoring NaN values
-        rmse = root_mean_squared_error(original, imputed, squared=False)
+        rmse = root_mean_squared_error(original, imputed)
         mad = mean_absolute_error(original, imputed)
     except ValueError as e:
         st.error(f"Metric calculation error: {e}")
