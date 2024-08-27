@@ -119,8 +119,6 @@ def main():
             if missing_action == "Fill missing values":
                 strategy = st.selectbox("Select an imputation strategy", ["mean", "median", "most_frequent", "random_forest", "expectation–maximization-EM", "gradient_boosting", "linear_regression"])
                 df = impute_missing_data(df, strategy=strategy)
-            elif missing_action == "Drop missing value rows":
-                df.dropna(inplace=True)
 
         # Check if the dataset has column names
         if has_header or not df.columns.equals(pd.RangeIndex(start=0, stop=df.shape[1], step=1)):
@@ -144,6 +142,8 @@ def main():
         # Descriptive statistics
         st.write("Descriptive Statistics:")
         st.write(df.describe())
+
+        df.dropna(inplace=True)
 
         # Visualise distributions by class
         st.write("Pairplot by Class:")
