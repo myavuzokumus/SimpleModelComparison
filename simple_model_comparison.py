@@ -72,7 +72,7 @@ def remove_other_class_columns(df, class_column):
 
 # Main Function
 def main():
-    st.set_page_config(page_title="Simple Model Comparison", page_icon=":shark:", initial_sidebar_state="expanded")
+    st.set_page_config(page_title="Simple Model Comparison", page_icon=":space_invader:", initial_sidebar_state="expanded")
     st.title("Simple Model Comparison")
 
     # About section
