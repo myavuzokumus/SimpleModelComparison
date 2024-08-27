@@ -8,7 +8,7 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, root_mean_squared_error
 
 
 # Missing data insertion function
@@ -49,7 +49,7 @@ def impute_missing_data(df, strategy='mean', n_neighbors=4):
 def calculate_metrics(original, imputed):
     try:
         # Calculate RMSE and MAD while ignoring NaN values
-        rmse = mean_squared_error(original, imputed, squared=False)
+        rmse = root_mean_squared_error(original, imputed, squared=False)
         mad = mean_absolute_error(original, imputed)
     except ValueError as e:
         st.error(f"Metric calculation error: {e}")
