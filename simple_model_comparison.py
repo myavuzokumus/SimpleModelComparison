@@ -32,7 +32,7 @@ def impute_missing_data(df, strategy='mean', n_neighbors=4):
         imputer = KNNImputer(n_neighbors=n_neighbors)
     elif strategy == 'random_forest':
         imputer = IterativeImputer(estimator=RandomForestRegressor(), random_state=0)
-    elif strategy == 'em':
+    elif strategy == 'expectation–maximization-EM':
         imputer = IterativeImputer(max_iter=10, random_state=0)
     elif strategy == 'gradient_boosting':
         imputer = IterativeImputer(estimator=GradientBoostingRegressor(), random_state=0)
@@ -117,7 +117,7 @@ def main():
         if df.isnull().values.any():
             missing_action = st.radio("There are missing values in the dataset. What would you like to do?", ("Drop missing value rows", "Fill missing values"))
             if missing_action == "Fill missing values":
-                strategy = st.selectbox("Select an imputation strategy", ["mean", "median", "most_frequent", "random_forest", "em", "gradient_boosting", "linear_regression"])
+                strategy = st.selectbox("Select an imputation strategy", ["mean", "median", "most_frequent", "random_forest", "expectation–maximization-EM", "gradient_boosting", "linear_regression"])
                 df = impute_missing_data(df, strategy=strategy)
             elif missing_action == "Drop missing value rows":
                 df.dropna(inplace=True)
@@ -171,7 +171,7 @@ def main():
                 st.warning(f"Column {column} could not be converted to numeric and will be skipped.")
 
         # Filling strategies
-        strategies = ['mean', 'median', 'most_frequent', 'random_forest', 'em', 'gradient_boosting', 'linear_regression']
+        strategies = ['mean', 'median', 'most_frequent', 'random_forest', 'expectation–maximization-EM', 'gradient_boosting', 'linear_regression']
         metrics_data = []
         with st.spinner("Metrics loading..."):
             for strategy in strategies:
