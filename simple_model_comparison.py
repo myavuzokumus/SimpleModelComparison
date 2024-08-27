@@ -130,7 +130,7 @@ def main():
                 df.columns = column_names.split(',')
                 st.write("Updated Data:")
 
-        st.write(df.head(15))
+        st.data_editor(df, width=575)
 
         # Auto-detect class column
         class_column = detect_class_column(df)
@@ -157,9 +157,9 @@ def main():
         missing_fraction = st.slider("Select Missing Data Fraction", 0.01, 0.50, 0.05)
         df_missing = introduce_missing_data(df.drop(columns=[class_column]), missing_fraction=missing_fraction)
         st.write("Missing Data Information:")
-        st.write(df_missing.isnull().sum())  # Eksik veri sayısı
+        st.write(df_missing.isnull().sum())
         st.write("Rows with Missing Data:")
-        st.write(df_missing[df_missing.isnull().any(axis=1)].index)  # Eksik verilerin olduğu satırlar
+        st.dataframe(df_missing[df_missing.isnull().any(axis=1)].index, hide_index=True)
 
         # Select numeric columns
         df_numeric = df.drop(columns=[class_column])
@@ -187,8 +187,9 @@ def main():
         # Display metrics in a formatted table
         if metrics_data:
             st.markdown("<h3 style='text-align: center;'>Imputation Metrics</h3>", unsafe_allow_html=True)
-            metrics_df = pd.DataFrame(metrics_data).sort_values(by=["RMSE", "MAD"], ascending=True)
-            st.table(metrics_df)
+            metrics_df = pd.DataFrame(metrics_data).sort_values(by=["RMSE", "MAD"], ascending=True).reset_index(drop=True)
+            metrics_df.index = metrics_df.index + 1
+            st.data_editor(metrics_df, width=575)
 
 if __name__ == "__main__":
     main()
